@@ -32,23 +32,30 @@ static double measureTime(
     const int original[],
     int n)
 {
-    int *copy = malloc((size_t)n * sizeof(int));
+    const int repeat = 10;
+    double total = 0.0;
 
-    if (copy == NULL) {
-        return -1.0;
+    for (int r = 0; r < repeat; r++) {
+        int *copy = malloc((size_t)n * sizeof(int));
+
+        if (copy == NULL) {
+            return -1.0;
+        }
+
+        memcpy(copy, original, (size_t)n * sizeof(int));
+
+        clock_t start = clock();
+
+        sortFunction(copy, n);
+
+        clock_t end = clock();
+
+        total += (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+
+        free(copy);
     }
 
-    memcpy(copy, original, (size_t)n * sizeof(int));
-
-    clock_t start = clock();
-
-    sortFunction(copy, n);
-
-    clock_t end = clock();
-
-    free(copy);
-
-    return (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    return total / repeat;
 }
 
 static void runCase(
