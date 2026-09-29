@@ -1,5 +1,10 @@
 # Sorting Algorithms Implementation and Performance Comparison
 
+**Name:** YUHAN WU
+**Student ID:** 2025193028
+**GitHub Repository:** https://github.com/18009062817-sketch/YUHANWU-algorithm-env
+---
+
 ## 1. Introduction
 
 This project implements and compares three sorting algorithms in C: Merge Sort, Quick Sort, and Heap Sort.
