@@ -14,7 +14,7 @@ CFLAGS ?= -std=c17 -Wall -Wextra -O2
 # `-I`는 아래 패턴 규칙이 대상 파일의 폴더로 붙인다. 여기서 고정하지 않는다.
 DEBUGFLAGS ?= -std=c17 -Wall -Wextra -g -O0
 
-.PHONY: all run run-c run-py test test-c test-py debug clean
+.PHONY: all run run-c run-py test test-c test-py bench debug clean
 
 all: test
 
@@ -22,6 +22,12 @@ run: run-c run-py
 
 run-c: src/main.out
 	@./src/main.out
+
+bench: src/bench.out
+	@./src/bench.out
+
+src/bench.out: src/bench.c src/sort.c src/sort.h
+	$(CC) $(CFLAGS) -Isrc -o $@ src/bench.c src/sort.c
 
 run-py:
 	@python3 src/main.py
